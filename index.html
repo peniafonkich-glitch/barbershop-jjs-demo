@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>JJ's Barbershop | Gimnazjalna 6, Bydgoszcz</title>
+<meta name="description" content="Makieta strony JJ's Barbershop z Bydgoszczy: strzyżenie fade, peeling kawitacyjny, sonoforeza, masaż twarzy. Umów wizytę.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Barlow:wght@400;500;600&display=swap&subset=latin-ext" rel="stylesheet">
+<style>
+/* tokens: czerń, mosiądz z logo, kość słoniowa; czerwień tylko jako sygnał */
+:root{
+  --coal:#121110;
+  --coal-2:#1c1a17;
+  --coal-3:#2a2723;
+  --brass:#c9a24d;
+  --brass-2:#e0bd6e;
+  --bone:#ece6d8;
+  --mute:#9d9584;
+  --red:#c2392e;
+  --line:#37332d;
+  --r:2px;
+  --gut:clamp(20px,5vw,64px);
+  --hd:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --bd:'Barlow','Helvetica Neue',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--coal)}
+body{font-family:var(--bd);font-size:17px;line-height:1.6;color:var(--bone);background:var(--coal);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+h1,h2,h3{font-family:var(--hd);font-weight:800;line-height:.92;letter-spacing:.005em;text-transform:uppercase}
+.wrap{max-width:1200px;margin:0 auto;padding:0 var(--gut)}
+.mute{color:var(--mute)}
+.small{font-size:14px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 28px;border-radius:var(--r);background:var(--brass);color:#16130d;font:600 16px var(--bd);letter-spacing:.04em;text-transform:uppercase;text-decoration:none;border:1px solid var(--brass);cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--brass-2)}
+.btn.alt{background:transparent;color:var(--bone);border-color:var(--mute)}
+.btn.alt:hover{border-color:var(--bone);background:transparent}
+
+header{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:14px var(--gut);border-bottom:1px solid transparent;transition:background .2s,border-color .2s}
+header.solid{background:rgba(18,17,16,.94);border-color:var(--line)}
+.brand{font:900 30px var(--hd);letter-spacing:.02em;text-transform:uppercase;text-decoration:none;color:var(--brass)}
+header nav{display:flex;gap:28px;font:500 14px var(--bd);letter-spacing:.12em;text-transform:uppercase}
+header nav a{text-decoration:none}
+header nav a:hover{color:var(--brass)}
+@media(max-width:560px){header nav .opt{display:none}}
+
+/* scena: słup barberski obraca się w trakcie przewijania */
+.intro{position:relative;height:100vh;height:100svh;overflow:hidden;background:var(--coal)}
+.giant{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);font:900 clamp(220px,46vw,720px)/.8 var(--hd);letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1.5px #3a352c;white-space:nowrap;user-select:none;pointer-events:none}
+#cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+.lines{position:absolute;left:var(--gut);bottom:clamp(40px,10vh,110px);z-index:3;width:min(46vw,640px)}
+.lines .l{position:absolute;left:0;bottom:0;width:100%}
+.lines .l h1,.lines .l h2{font-size:clamp(54px,9vw,150px);color:var(--bone)}
+.lines .l p{margin-top:18px;max-width:34ch;color:var(--mute)}
+.lines{height:clamp(190px,32vh,330px)}
+.l2,.l3{opacity:0}
+.facts{position:absolute;right:var(--gut);bottom:clamp(40px,10vh,110px);z-index:3;text-align:right;font:500 14px/1.7 var(--bd);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.facts b{color:var(--brass);font-weight:600}
+.hint{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;font:500 12px var(--bd);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.load{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;font:500 14px var(--bd);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);transition:opacity .4s}
+.shade{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(90deg,rgba(18,17,16,.82) 0,rgba(18,17,16,0) 52%)}
+@media(max-width:820px){
+  .lines{width:calc(100% - 2 * var(--gut));height:230px;bottom:90px}
+  .lines .l h1,.lines .l h2{font-size:clamp(52px,16vw,96px)}
+  .shade{background:linear-gradient(0deg,rgba(18,17,16,.9) 0,rgba(18,17,16,0) 60%)}
+  .facts{display:none}
+  .giant{font-size:78vw;transform:translate(-50%,-62%)}
+}
+.intro.static .l2,.intro.static .l3{display:none}
+
+/* zdanie z podświetlanymi słowami */
+.statement{padding:clamp(90px,16vh,200px) 0}
+.statement p{font:800 clamp(34px,6vw,86px)/1 var(--hd);text-transform:uppercase;max-width:15em}
+.statement .w{color:#3a352c;transition:color .25s}
+.statement .w.on{color:var(--bone)}
+.statement cite{display:block;margin-top:28px;font:500 13px var(--bd);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);font-style:normal}
+
+/* usługi */
+.sec{padding:clamp(70px,12vh,140px) 0;border-top:1px solid var(--line)}
+.sec h2{font-size:clamp(44px,7vw,100px)}
+.sec .lead{margin-top:18px;max-width:52ch;color:var(--mute)}
+.rows{list-style:none;margin-top:clamp(36px,6vh,64px);border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,5fr) auto;gap:var(--gut);align-items:center;padding:28px 0;border-bottom:1px solid var(--line);transition:background .2s}
+.row:hover{background:var(--coal-2)}
+.row h3{font-size:clamp(34px,4.6vw,60px)}
+.row .tag{display:inline-block;margin-bottom:10px;font:600 11px var(--bd);letter-spacing:.16em;text-transform:uppercase;color:var(--red);border:1px solid var(--red);padding:3px 8px;border-radius:var(--r)}
+.row p{color:var(--mute);max-width:44ch}
+.pick{min-width:140px;min-height:48px;padding:0 20px;border:1px solid var(--brass);border-radius:var(--r);background:transparent;color:var(--brass);font:600 14px var(--bd);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.pick:hover{background:var(--brass);color:#16130d}
+.pick[aria-pressed=true]{background:var(--brass);color:#16130d}
+@media(max-width:820px){.row{grid-template-columns:1fr;gap:14px;padding:24px 0}.pick{justify-self:start}}
+
+/* rezerwacja */
+.book{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(32px,6vw,88px);align-items:start;margin-top:clamp(36px,6vh,64px)}
+@media(max-width:900px){.book{grid-template-columns:1fr}}
+fieldset{border:0;margin-bottom:28px}
+legend,label.t{display:block;font:600 13px var(--bd);letter-spacing:.14em;text-transform:uppercase;color:var(--brass);margin-bottom:10px;padding:0}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label{margin:0;padding:10px 18px;min-height:46px;display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:var(--r);cursor:pointer;font:500 15px var(--bd);color:var(--bone);background:var(--coal-2)}
+.seg label:hover{border-color:var(--mute)}
+.seg input:checked+label{background:var(--bone);color:#16130d;border-color:var(--bone)}
+.seg input:focus-visible+label{outline:2px solid var(--brass);outline-offset:2px}
+input[type=text]{width:100%;min-height:50px;padding:0 14px;font:16px var(--bd);color:var(--bone);background:var(--coal-2);border:1px solid var(--line);border-radius:var(--r)}
+input[type=text]:focus{outline:2px solid var(--brass);outline-offset:1px;border-color:var(--brass)}
+.fields{display:grid;gap:18px}
+.card{border:1px solid var(--brass);border-radius:var(--r);padding:clamp(22px,3vw,36px);background:var(--coal-2);position:sticky;top:84px;background-image:linear-gradient(var(--coal-2),var(--coal-2))}
+.card h3{font-size:34px;color:var(--brass);margin-bottom:18px}
+.card pre{white-space:pre-wrap;font:17px/1.65 var(--bd);min-height:190px;color:var(--bone)}
+.card pre.hint2{color:var(--mute)}
+.acts{display:grid;gap:10px;margin-top:24px}
+.msg{min-height:22px;margin-top:12px;font-size:14px;color:var(--mute)}
+@media(max-width:900px){.card{position:static}}
+
+/* salon */
+.salon{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,6vw,88px);margin-top:clamp(36px,6vh,64px)}
+@media(max-width:900px){.salon{grid-template-columns:1fr}}
+dl{display:grid;grid-template-columns:auto 1fr;gap:12px 28px}
+dt{font:600 13px var(--bd);letter-spacing:.14em;text-transform:uppercase;color:var(--brass);padding-top:5px}
+dd{font-size:19px}
+dd a{text-decoration-color:var(--mute)}
+.slots{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.slot{position:relative;aspect-ratio:4/3;background:var(--coal-2);border:1px dashed var(--line);border-radius:var(--r);overflow:hidden}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot span{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:14px;font-size:13px;color:var(--mute)}
+.map{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;min-height:420px;background:var(--coal-2)}
+.map iframe{width:100%;height:100%;min-height:420px;border:0;display:block;filter:grayscale(1) invert(.92) contrast(.9)}
+footer{padding:36px 0 56px;border-top:1px solid var(--line)}
+footer p{max-width:80ch}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <a class="brand" href="#start">JJ's</a>
+  <nav aria-label="Menu"><a class="opt" href="#uslugi">Usługi</a><a href="#wizyta">Wizyta</a><a class="opt" href="#salon">Salon</a></nav>
+</header>
+
+<main>
+<section class="intro" id="start">
+  <div class="giant" aria-hidden="true">JJ'S</div>
+  <canvas id="cv" role="img" aria-label="Trójwymiarowy słup barberski z biało-czerwono-niebieską spiralą i mosiężnymi zakończeniami. Model wygenerowany komputerowo, nie zdjęcie salonu."></canvas>
+  <div class="shade"></div>
+  <div class="load" id="load">Ładuję model 3D</div>
+  <div class="lines">
+    <div class="l l1"><h1>Fade.</h1><p>JJ's Barbershop, ul. Gimnazjalna 6 w Bydgoszczy.</p></div>
+    <div class="l l2"><h2>Twarz też.</h2><p>Peeling kawitacyjny, sonoforeza i masaż twarzy.</p></div>
+    <div class="l l3"><h2>Umów wizytę.</h2><p>Zadzwoń albo wybierz usługę poniżej.</p></div>
+  </div>
+  <div class="facts"><b>795 997 499</b><br>Gimnazjalna 6<br>85-007 Bydgoszcz</div>
+  <div class="hint" id="hint">Przewiń</div>
+</section>
+
+<section class="statement" aria-label="Hasło salonu">
+  <div class="wrap">
+    <p id="st">Świeże cięcie, perfekcyjny fade. Zadbaj o swój styl.</p>
+    <cite>JJ's Barbershop na Facebooku</cite>
+  </div>
+</section>
+
+<section class="sec" id="uslugi">
+  <div class="wrap">
+    <h2>Usługi</h2>
+    <p class="lead">Pełny cennik i godziny podaje salon. Zaznacz, co Cię interesuje, a wiadomość z zapytaniem przygotuje się sama.</p>
+    <ul class="rows" id="rows"></ul>
+  </div>
+</section>
+
+<section class="sec" id="wizyta">
+  <div class="wrap">
+    <h2>Umów wizytę</h2>
+    <div class="book">
+      <div>
+        <fieldset><legend>Termin</legend><div class="seg" id="day"></div></fieldset>
+        <fieldset><legend>Pora</legend><div class="seg" id="part"></div></fieldset>
+        <div class="fields">
+          <div><label class="t" for="nt">Uwagi</label><input type="text" id="nt" placeholder="np. skin fade, krótko po bokach" autocomplete="off"></div>
+          <div><label class="t" for="nm">Twoje imię</label><input type="text" id="nm" autocomplete="given-name"></div>
+        </div>
+      </div>
+      <aside class="card" aria-live="polite">
+        <h3>Twoja wiadomość</h3>
+        <pre id="pre" class="hint2">Wybierz usługę z listy powyżej, a tu pojawi się gotowa wiadomość do salonu.</pre>
+        <div class="acts">
+          <a class="btn" id="mail" href="#">Wyślij e-mailem</a>
+          <a class="btn alt" href="tel:+48795997499">Zadzwoń: 795 997 499</a>
+          <a class="btn alt" href="https://www.facebook.com/p/BarbershopJJs-100077827538264/" rel="noopener" target="_blank">Napisz na Facebooku</a>
+          <button type="button" class="btn alt" id="copy">Kopiuj wiadomość</button>
+        </div>
+        <div class="msg" id="msg" role="status"></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="salon">
+  <div class="wrap">
+    <h2>Salon</h2>
+    <div class="salon">
+      <div>
+        <dl>
+          <dt>Adres</dt><dd>ul. Gimnazjalna 6<br>85-007 Bydgoszcz</dd>
+          <dt>Telefon</dt><dd><a href="tel:+48795997499">795 997 499</a></dd>
+          <dt>E-mail</dt><dd><a href="mailto:barbershopjjss@gmail.com">barbershopjjss@gmail.com</a></dd>
+          <dt>Facebook</dt><dd><a href="https://www.facebook.com/p/BarbershopJJs-100077827538264/" rel="noopener">Barbershop.JJs</a></dd>
+          <dt>Opinie</dt><dd>100% poleca, 5 opinii na Facebooku</dd>
+        </dl>
+        <div class="slots">
+          <div class="slot"><span>Tu pojawi się zdjęcie salonu</span><img src="photos/salon-1.jpg" alt="Wnętrze JJ's Barbershop" loading="lazy" onerror="this.remove()"></div>
+          <div class="slot"><span>Tu pojawi się zdjęcie pracy</span><img src="photos/salon-2.jpg" alt="Fryzura wykonana w JJ's Barbershop" loading="lazy" onerror="this.remove()"></div>
+        </div>
+      </div>
+      <div class="map"><iframe title="Mapa: JJ's Barbershop, Gimnazjalna 6, Bydgoszcz" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=18.0000%2C53.1230%2C18.0160%2C53.1310&amp;layer=mapnik&amp;marker=53.1271299%2C18.0077977"></iframe></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="small mute">To makieta nowej strony. Nie ma na niej zdjęć salonu: słup barberski na ekranie to model 3D wygenerowany komputerowo. W pełnej wersji pojawią się prawdziwe zdjęcia, cennik i godziny otwarcia, za zgodą właścicieli. Teksty, adres i opinie pochodzą z facebookowej strony Barbershop.JJs.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var hd=$('hd'),intro=document.querySelector('.intro');
+var still=matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var id=a.getAttribute('href').slice(1);var t=id&&$(id);if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-(id==='start'?0:56),behavior:still?'auto':'smooth'})}});
+addEventListener('scroll',function(){hd.classList.toggle('solid',scrollY>40)},{passive:true});
+
+/* 3D */
+var cv=$('cv'),load=$('load'),ok=false,model=null,pivot,R,S,cam,st={ry:-.4,s:1,y:0,rx:0};
+try{var tc=document.createElement('canvas');ok=!!(window.WebGLRenderingContext&&(tc.getContext('webgl')||tc.getContext('experimental-webgl')))&&window.THREE&&THREE.GLTFLoader}catch(e){}
+if(ok){
+ R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio||1,2));R.outputEncoding=THREE.sRGBEncoding;
+ S=new THREE.Scene();cam=new THREE.PerspectiveCamera(30,1,.1,100);cam.position.set(0,0,8);
+ S.add(new THREE.AmbientLight(0xffffff,.7));
+ var k=new THREE.DirectionalLight(0xfff0d8,1.6);k.position.set(-3,4,5);S.add(k);
+ var r=new THREE.DirectionalLight(0xc9a24d,1.1);r.position.set(4,1,-4);S.add(r);
+ pivot=new THREE.Group();S.add(pivot);
+ new THREE.GLTFLoader().load('pole.glb',function(g){
+  model=g.scene;var b=new THREE.Box3().setFromObject(model),sz=b.getSize(new THREE.Vector3()),c=b.getCenter(new THREE.Vector3());
+  var s=3.4/Math.max(sz.x,sz.y,sz.z);model.scale.setScalar(s);model.position.set(-c.x*s,-c.y*s,-c.z*s);
+  pivot.add(model);load.style.opacity=0;setTimeout(function(){load.style.display='none'},500);draw()
+ },undefined,function(){load.textContent='Nie udało się wczytać modelu 3D.'});
+}else{load.style.display='none'}
+function fit(){if(!ok)return;var w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;R.setSize(w,h,false);cam.aspect=w/h;cam.position.z=w/h<.8?10.5:8.6;cam.updateProjectionMatrix();draw()}
+if(ok){if(window.ResizeObserver)new ResizeObserver(fit).observe(cv);else addEventListener('resize',fit)}
+var vis=true;
+if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe(intro);
+function draw(){
+ if(!model)return;
+ var w=cv.clientWidth/cv.clientHeight;
+ pivot.rotation.y=st.ry;pivot.rotation.x=st.rx;pivot.scale.setScalar(st.s);
+ pivot.position.x=w>1.9?0:(w>.8?1.1:0);pivot.position.y=st.y;
+ R.render(S,cam)}
+(function loop(){requestAnimationFrame(loop);if(vis)draw()})();
+
+/* scroll */
+if(window.gsap&&window.ScrollTrigger&&!still){
+ gsap.registerPlugin(ScrollTrigger);
+ var tl=gsap.timeline({scrollTrigger:{trigger:'.intro',start:'top top',end:'+=420%',scrub:.7,pin:true,anticipatePin:1}});
+ tl.to(st,{ry:Math.PI*4-.4,s:1.12,rx:.06,duration:7,ease:'none'},0)
+   .to('#hint',{opacity:0,duration:.4},.2)
+   .fromTo('.l1',{opacity:1,y:0},{opacity:0,y:-40,duration:.7},1.6)
+   .fromTo('.l2',{opacity:0,y:40},{opacity:1,y:0,duration:.7},2.1)
+   .fromTo('.l2',{opacity:1,y:0},{opacity:0,y:-40,duration:.7,immediateRender:false},4)
+   .fromTo('.l3',{opacity:0,y:40},{opacity:1,y:0,duration:.7},4.5)
+   .to('.giant',{x:'-8%',duration:7,ease:'none'},0);
+ gsap.from('.lines',{opacity:0,y:30,duration:.9,ease:'power3.out',delay:.1,clearProps:'all'});
+}else{intro.classList.add('static');st.ry=.5}
+
+/* słowa podświetlane przy przewijaniu */
+var stEl=$('st'),words=stEl.textContent.split(' ');
+stEl.innerHTML=words.map(function(w){return '<span class="w">'+w+'</span>'}).join(' ');
+var ws=stEl.querySelectorAll('.w');
+function lit(){var rr=stEl.getBoundingClientRect(),h=innerHeight,p=(h*.85-rr.top)/(h*.6+rr.height);p=Math.max(0,Math.min(1,p));var n=Math.round(p*ws.length);ws.forEach(function(el,i){el.classList.toggle('on',i<n)})}
+if(still){ws.forEach(function(el){el.classList.add('on')})}else{addEventListener('scroll',lit,{passive:true});addEventListener('resize',lit);lit()}
+
+/* usługi (z posta salonu z 13 października) i wiadomość */
+var svc=[
+ {n:'Strzyżenie fade',d:'Świeże cięcie i perfekcyjny fade. Opisz w uwagach, jaką fryzurę chcesz.',tag:''},
+ {n:'Peeling kawitacyjny',d:'Delikatne oczyszczanie skóry i usuwanie zanieczyszczeń.',tag:'Nowość'},
+ {n:'Sonoforeza',d:'Zabieg wspomagający wprowadzanie składników aktywnych w głąb skóry.',tag:'Nowość'},
+ {n:'Masaż twarzy',d:'Chwila odprężenia, relaksu i pielęgnacji.',tag:'Nowość'}
+];
+var sel=svc.map(function(){return false}),rows=$('rows');
+svc.forEach(function(s,i){var li=document.createElement('li');li.className='row';
+ li.innerHTML='<div>'+(s.tag?'<span class="tag">'+s.tag+'</span>':'')+'<h3>'+s.n+'</h3></div><p>'+s.d+'</p><button type="button" class="pick" aria-pressed="false">Wybieram</button>';
+ var b=li.querySelector('.pick');
+ b.onclick=function(){sel[i]=!sel[i];b.setAttribute('aria-pressed',sel[i]);b.textContent=sel[i]?'Wybrano':'Wybieram';calc()};
+ rows.appendChild(li)});
+var days=['najbliższy wolny termin','dziś','jutro','w weekend'],parts=['bez znaczenia','rano','w południe','po południu'];
+function seg(id,arr,name){var el=$(id);arr.forEach(function(t,i){var x=name+i;el.insertAdjacentHTML('beforeend','<input type="radio" name="'+name+'" id="'+x+'" value="'+t+'"'+(i===0?' checked':'')+'><label for="'+x+'">'+t+'</label>')})}
+seg('day',days,'d');seg('part',parts,'p');
+function val(n,d){var c=document.querySelector('input[name='+n+']:checked');return c?c.value:d}
+function txt(){var L=['Dzień dobry,','','zapytuję o możliwość umówienia wizyty. Interesuje mnie:'],n=0;
+ svc.forEach(function(s,i){if(sel[i]){L.push('• '+s.n);n++}});
+ L.push('','Termin: '+val('d',days[0]));var p=val('p',parts[0]);if(p!==parts[0])L.push('Pora: '+p);
+ var nt=$('nt').value.trim();if(nt)L.push('Uwagi: '+nt);var nm=$('nm').value.trim();L.push('','Proszę o informację o wolnych terminach i cenie.','','Pozdrawiam'+(nm?', '+nm:''));return {n:n,s:L.join('\n')}}
+function calc(){var r=txt(),pre=$('pre');
+ pre.textContent=r.n?r.s:'Wybierz usługę z listy powyżej, a tu pojawi się gotowa wiadomość do salonu.';pre.classList.toggle('hint2',!r.n);
+ $('mail').href='mailto:barbershopjjss@gmail.com?subject='+encodeURIComponent('Umówienie wizyty')+'&body='+encodeURIComponent(r.s)}
+['nm','nt'].forEach(function(i){$(i).addEventListener('input',calc)});$('day').addEventListener('change',calc);$('part').addEventListener('change',calc);
+$('copy').addEventListener('click',function(){var m=$('msg'),r=txt();if(!r.n){m.textContent='Najpierw wybierz usługę.';return}
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(r.s).then(function(){m.textContent='Skopiowano. Wklej w wiadomość do salonu.'},function(){m.textContent='Nie udało się skopiować. Zaznacz tekst ręcznie.'})}else{m.textContent='Nie udało się skopiować. Zaznacz tekst ręcznie.'}});
+$('mail').addEventListener('click',function(e){if(!txt().n){e.preventDefault();$('msg').textContent='Najpierw wybierz usługę.'}});
+calc();
+})();
+</script>
+<script data-goatcounter="https://penia-demo.goatcounter.com/count" data-goatcounter-settings='{"path":"barbershop-jjs"}' async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
